@@ -8,7 +8,8 @@ def create_socket():
         global host
         global port
         global s
-        host = "172.16.14.185"
+        host = "172.16.14.185" #fonction trouver adresse machine
+        #client -> scanner adresses pour trouver le serveur en lui feedant le port
         port = 9999
         s = socket.socket()
 
