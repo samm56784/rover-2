@@ -3,17 +3,15 @@ import os
 import subprocess
 
 s = socket.socket()
-host = '172.16.14.185'
+host = '192.168.2.212'
 port = 9999
 
 s.connect((host, port))
 
 while True:
-    commande = s.recv(1024)
+    commande = input()
+    s.send(str.encode(commande))
+    if commande == "q":
+        s.close()
 
-
-    if len(commande) > 0:
-        print(commande)
-        if commande == b'2':
-            print("gg")
 
