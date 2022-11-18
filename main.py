@@ -5,13 +5,15 @@
 import os
 import time
 import RPi.GPIO as GPIO
+from server import *
+
 from time import sleep
 
 
 in1 = 11
 in2 = 13
 in3 = 15
-in4 = 18
+in4 = 16
 temp1 =1
 
 #GPIO.cleanup()
@@ -40,27 +42,27 @@ print("\n")
 
 while (1):
 
-    x = input()
-
-    if x == 'r':
+    #x = input()
+    x = recv_input()
+    if x == b'r':
         print("run")
         if (temp1 == 1):
             GPIO.output(in1, GPIO.HIGH)
             GPIO.output(in2, GPIO.HIGH)
             GPIO.output(in3, GPIO.LOW)
 
-            x = 'z'
+            x = b'z'
         else:
             GPIO.output(in1, GPIO.LOW)
             GPIO.output(in2, GPIO.HIGH)
             GPIO.output(in3, GPIO.LOW)
-            GPIO.output(in4, GPIO.HIGH)
+
 
             print("backward")
-            x = 'z'
+            x = b'z'
 
 
-    elif x == 'q':
+    elif x == b'q':
         print("stop")
 
         #changer les pins ici pour mettre le signal a 2.5 volt (qui est notre neutre)
@@ -68,9 +70,9 @@ while (1):
         GPIO.output(in2, GPIO.HIGH)
         GPIO.output(in3, GPIO.LOW)
         #GPIO.output(in4, GPIO.LOW)
-        x = 'z'
+        x = b'z'
 
-    elif x == 'w':
+    elif x == b'w':
         print("forward")
 
         GPIO.output(in1, GPIO.HIGH)
@@ -80,9 +82,9 @@ while (1):
 
         #GPIO.output(in4, GPIO.LOW)
 
-        x = 'z'
+        x = b'z'
 
-    elif x == 's':
+    elif x == b's':
         print("backward")
 
         GPIO.output(in1, GPIO.LOW)
@@ -91,44 +93,46 @@ while (1):
         #GPIO.output(in4, GPIO.HIGH)
         #temp1 = 0
 
-        x = 'z'
+        x = b'z'
 
-    elif x == 'a':
+    elif x == b'a':
         print("left")
-        GPIO.output(in1, GPIO.LOW)
-        GPIO.output(in2, GPIO.LOW)
-        GPIO.output(in3, GPIO.HIGH)
+        #GPIO.output(in1, GPIO.LOW)
+        #GPIO.output(in2, GPIO.LOW)
+        #GPIO.output(in3, GPIO.HIGH)
+        GPIO.output(in4, GPIO.HIGH)
 
-        x = 'z'
+        x = b'z'
 
 
 
-    elif x == 'd':
+    elif x == b'd':
         print("right")
 
-        GPIO.output(in1, GPIO.LOW)
-        GPIO.output(in2, GPIO.HIGH)
-        GPIO.output(in3, GPIO.LOW)
+        #GPIO.output(in1, GPIO.LOW)
+        #GPIO.output(in2, GPIO.HIGH)
+        #GPIO.output(in3, GPIO.LOW)
+        GPIO.output(in4, GPIO.LOW)
 
-        x = 'z'
+        x = b'z'
 
 
 
-    elif x == 't':
+    elif x == b't':
         #forward a environ 40%
         print("forward 40%")
         GPIO.output(in1, GPIO.LOW)
         GPIO.output(in2, GPIO.LOW)
         GPIO.output(in3, GPIO.HIGH)
 
-    elif x == 'y':
+    elif x == b'y':
         #backward a environ 40%
         GPIO.output(in1, GPIO.HIGH)
         GPIO.output(in2, GPIO.LOW)
         GPIO.output(in3, GPIO.LOW)
 
 
-    elif x == 'e':
+    elif x == b'e':
         GPIO.cleanup()
         print("GPIO Clean up")
         break

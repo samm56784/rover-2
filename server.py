@@ -77,19 +77,24 @@ def requests_management(choix):
         #backward
     else:
         return
+    return choix
 
 
+def recv_input():
+    request = b'o'
+    while request != b'q':
+        request = conn.recv(1024)
+        return request
+        #print(request)
 
 
 def main():
-    request = "a"
+    request = b'o'
     create_socket()
     bind_socket()
     socket_accept()
-    while request != b'q':
-        request = conn.recv(1024)
-        requests_management(request)
-        #print(request)
+    while request !=b'q':
+        recv_input()
     conn.close()
 
 main()
