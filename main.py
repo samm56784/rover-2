@@ -8,17 +8,17 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 
-in1 = 13
-in2 = 15
-in3 = 16
+in1 = 11
+in2 = 13
+in3 = 15
 in4 = 18
 temp1 =1
 
-GPIO.cleanup()
+#GPIO.cleanup()
 
 GPIO.setmode(GPIO.BOARD)
 #GPIO.setmode(GPIO.BCM)
-
+GPIO.setwarnings(False)
 #print(mode)
 GPIO.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
@@ -26,8 +26,8 @@ GPIO.output(in1 ,GPIO.LOW)
 GPIO.output(in2 ,GPIO.LOW)
 
 GPIO.setup(in3,GPIO.OUT)
-GPIO.setup(in3,GPIO.OUT)
-GPIO.output(in4 ,GPIO.LOW)
+GPIO.setup(in4,GPIO.OUT)
+GPIO.output(in3 ,GPIO.LOW)
 GPIO.output(in4 ,GPIO.LOW)
 
 #if (GPIO.input(16)):
@@ -46,9 +46,8 @@ while (1):
         print("run")
         if (temp1 == 1):
             GPIO.output(in1, GPIO.HIGH)
-            GPIO.output(in2, GPIO.LOW)
-            GPIO.output(in3, GPIO.HIGH)
-            GPIO.output(in4, GPIO.LOW)
+            GPIO.output(in2, GPIO.HIGH)
+            GPIO.output(in3, GPIO.LOW)
 
             x = 'z'
         else:
@@ -61,74 +60,77 @@ while (1):
             x = 'z'
 
 
-    elif x == 's':
+    elif x == 'q':
         print("stop")
 
         #changer les pins ici pour mettre le signal a 2.5 volt (qui est notre neutre)
-        GPIO.output(in1, GPIO.LOW)
-        GPIO.output(in2, GPIO.LOW)
+        GPIO.output(in1, GPIO.HIGH)
+        GPIO.output(in2, GPIO.HIGH)
         GPIO.output(in3, GPIO.LOW)
-        GPIO.output(in4, GPIO.LOW)
+        #GPIO.output(in4, GPIO.LOW)
         x = 'z'
 
-    elif x == 'f':
+    elif x == 'w':
         print("forward")
 
         GPIO.output(in1, GPIO.HIGH)
-        GPIO.output(in2, GPIO.LOW)
+        GPIO.output(in2, GPIO.HIGH)
         GPIO.output(in3, GPIO.HIGH)
-        GPIO.output(in4, GPIO.LOW)
-        temp1 = 1
+        #GPIO.output(in4, GPIO.HIGH)
+
+        #GPIO.output(in4, GPIO.LOW)
+
         x = 'z'
 
-    elif x == 'b':
+    elif x == 's':
         print("backward")
+
+        GPIO.output(in1, GPIO.LOW)
+        GPIO.output(in2, GPIO.LOW)
+        GPIO.output(in3, GPIO.LOW)
+        #GPIO.output(in4, GPIO.HIGH)
+        #temp1 = 0
+
+        x = 'z'
+
+    elif x == 'a':
+        print("left")
+        GPIO.output(in1, GPIO.LOW)
+        GPIO.output(in2, GPIO.LOW)
+        GPIO.output(in3, GPIO.HIGH)
+
+        x = 'z'
+
+
+
+    elif x == 'd':
+        print("right")
 
         GPIO.output(in1, GPIO.LOW)
         GPIO.output(in2, GPIO.HIGH)
         GPIO.output(in3, GPIO.LOW)
-        GPIO.output(in4, GPIO.HIGH)
-        temp1 = 0
+
         x = 'z'
 
-   # elif x == 'l':
-    #    print("low")
-     #   p.ChangeDutyCycle(25)
-      #  x = 'z'
-
-       # os.system('gpio pwm 24 50')
-
-  #  elif x == 'm':
-       # print("medium")
-      #  p.ChangeDutyCycle(50)
-      #  x = 'z'
-     #   os.system('gpio pwm 24 400')
 
 
-  #  elif x == 'h':
-      #  print("high")
-       # p.ChangeDutyCycle(100)
-      #  x = 'z'
-      #  os.system('gpio pwm 24 800')
+    elif x == 't':
+        #forward a environ 40%
+        print("forward 40%")
+        GPIO.output(in1, GPIO.LOW)
+        GPIO.output(in2, GPIO.LOW)
+        GPIO.output(in3, GPIO.HIGH)
+
+    elif x == 'y':
+        #backward a environ 40%
+        GPIO.output(in1, GPIO.HIGH)
+        GPIO.output(in2, GPIO.LOW)
+        GPIO.output(in3, GPIO.LOW)
+
 
     elif x == 'e':
         GPIO.cleanup()
         print("GPIO Clean up")
-        break
-
-    elif x == 'r':
-
-        GPIO.output(in1, GPIO.HIGH)
-        GPIO.output(in2, GPIO.LOW)
-        GPIO.output(in3, GPIO.LOW)
-        GPIO.output(in4, GPIO.HIGH)
-        break
-    elif x == 'l':
-
-        GPIO.output(in3, GPIO.HIGH)
-        GPIO.output(in4, GPIO.LOW)
-        GPIO.output(in1, GPIO.LOW)
-        GPIO.output(in2, GPIO.HIGH)
         break
 
     else:
