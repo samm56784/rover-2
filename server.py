@@ -8,7 +8,7 @@ def create_socket():
         global host
         global port
         global s
-        host = "172.16.14.158" #fonction trouver adresse machine
+        host = "192.168.1.100" #fonction trouver adresse machine
         #client -> scanner adresses pour trouver le serveur en lui feedant le port
         port = 9999
         s = socket.socket()
@@ -81,20 +81,17 @@ def requests_management(choix):
 
 
 def recv_input():
-    request = b'o'
-    while request != b'q':
-        request = conn.recv(1024)
-        return request
+    request = conn.recv(1024)
+    return request
         #print(request)
 
-
-def main():
-    request = b'o'
+def initialisation():
     create_socket()
     bind_socket()
     socket_accept()
-    while request !=b'q':
-        recv_input()
-    conn.close()
 
-main()
+'''def looprecv():
+    request = b'o'
+    while request !=b'q':
+        request =recv_input()
+    conn.close()'''
