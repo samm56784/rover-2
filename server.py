@@ -81,6 +81,7 @@ def requests_management(choix):
 
 
 def recv_input():
+    request = b'z'
     request = conn.recv(1024)
     return request
         #print(request)
